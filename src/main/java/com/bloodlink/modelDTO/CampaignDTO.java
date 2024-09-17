@@ -2,6 +2,7 @@ package com.bloodlink.modelDTO;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
 
 import com.bloodlink.model.Address;
 
@@ -17,9 +18,9 @@ public class CampaignDTO {
 	
 	private String venue;
 	
-	private Time starting;
+	private LocalTime starting;
 	
-	private Time ending;
+	private LocalTime ending;
 	
 	private Date date;
 	
@@ -61,19 +62,21 @@ public class CampaignDTO {
 		this.venue = venue;
 	}
 
-	public Time getStarting() {
+	
+
+	public LocalTime getStarting() {
 		return starting;
 	}
 
-	public void setStarting(Time starting) {
+	public void setStarting(LocalTime starting) {
 		this.starting = starting;
 	}
 
-	public Time getEnding() {
+	public LocalTime getEnding() {
 		return ending;
 	}
 
-	public void setEnding(Time ending) {
+	public void setEnding(LocalTime ending) {
 		this.ending = ending;
 	}
 

@@ -1,32 +1,14 @@
-package com.bloodlink.model;
+package com.bloodlink.transferData;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-
-@Entity
-public class Campaign {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+public class CampaignDataTransfer {
+private int id;
 	
 	private String organization;
 	
-	@ManyToOne
-	@JoinColumn(name="addressId")
-	@JsonIgnore
-	private Address addressId;
+	private String address;
 	
 	private String venue;
 	
@@ -39,16 +21,6 @@ public class Campaign {
 	private String phoneN;
 	
 	private String gmail;
-	
-	private String status;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public int getId() {
 		return id;
@@ -66,14 +38,12 @@ public class Campaign {
 		this.organization = organization;
 	}
 
-	
-
-	public Address getAddressId() {
-		return addressId;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddressId(Address addressId) {
-		this.addressId = addressId;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getVenue() {
@@ -83,8 +53,6 @@ public class Campaign {
 	public void setVenue(String venue) {
 		this.venue = venue;
 	}
-
-	
 
 	public LocalTime getStarting() {
 		return starting;
@@ -125,5 +93,6 @@ public class Campaign {
 	public void setGmail(String gmail) {
 		this.gmail = gmail;
 	}
-		
+	
+
 }

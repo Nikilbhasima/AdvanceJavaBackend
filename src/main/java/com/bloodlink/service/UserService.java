@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -45,7 +45,10 @@ public class UserService {
 		donor.setDate(usDto.getDate());
 		donor.setGender(usDto.getGender());
 		donor.setAddressId(address.get());;
-		donor.setPassword(usDto.getPassword());
+		String hashPassowrd=DigestUtils.sha256Hex(usDto.getPassword().getBytes());
+//		donor.setPassword(usDto.getPassword());
+		donor.setPassword(hashPassowrd);
+		
 		donor.setGmail(usDto.getGmail());
 		donor.setPhone(usDto.getPhone());
 		donor.setAvailability("available");
@@ -56,7 +59,9 @@ public class UserService {
 	
 	public boolean checkCredentialValidation(UserDTO userDTO) {
 		
-		if(donorRepo.existsByPhoneAndPassword(userDTO.getPhone(),userDTO.getPassword())) {
+		String hpwd=DigestUtils.sha256Hex(userDTO.getPassword().getBytes());
+		
+		if(donorRepo.existsByPhoneAndPassword(userDTO.getPhone(),hpwd)) {
 			return true;
 		}else {
 			return false;
@@ -130,7 +135,8 @@ public class UserService {
 	}
 	
 	public Donor getByPhoneAndPassword(UserDTO dto) {
-		Donor donor=donorRepo.findByPhoneAndPassword(dto.getPhone(), dto.getPassword());
+		String hpwd=DigestUtils.sha256Hex(dto.getPassword().getBytes());
+		Donor donor=donorRepo.findByPhoneAndPassword(dto.getPhone(),hpwd);
 		return donor;
 	}
 	
@@ -141,8 +147,9 @@ public class UserService {
 		if(donor.isPresent()) {
 			Donor donor2=donor.get();
 			String password=dto.getPassword();
+			String hpwd=DigestUtils.sha256Hex(dto.getPassword().getBytes());
 			String passwordD=donor2.getPassword();
-			if(password.equals(passwordD)) {
+			if(hpwd.equals(passwordD)) {
 				return true;
 			}
 		}
@@ -155,7 +162,8 @@ public class UserService {
 		System.out.println("hello:"+id);
 		if(donor.isPresent()) {
 			Donor donor2=donor.get();
-			donor2.setPassword(dto.getPassword());
+			String hpwd=DigestUtils.sha256Hex(dto.getPassword().getBytes());
+			donor2.setPassword(hpwd);
 			donorRepo.save(donor2);
 			return true;
 		}
@@ -179,5 +187,10 @@ public class UserService {
 		 donor2.setPhone(dto.getPhone());
 		 
 		 donorRepo.save(donor2);
+	}
+	
+	public long countUser() {
+		long users=donorRepo.getNumberOfUser();
+		return users;
 	}
 }

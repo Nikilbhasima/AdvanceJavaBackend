@@ -24,7 +24,7 @@ public class Address {
 	@OneToMany(mappedBy = "addressId")
 	private List<RequestBlood> requestBloodList;
 
-	@OneToMany(mappedBy = "addressId")
+	@OneToMany(mappedBy = "address")
 	private List<Ambulance> aList;
 
 	@OneToMany(mappedBy = "addressId")

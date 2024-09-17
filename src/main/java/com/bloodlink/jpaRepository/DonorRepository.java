@@ -21,6 +21,9 @@ public interface DonorRepository extends JpaRepository<Donor, Integer> {
 
     @Query("SELECT rb FROM RequestBlood rb JOIN rb.acceptedList d WHERE d.id = :donorId")
 	List<RequestBlood> findParticipatedRequestsByDonor(int donorId);
+
+    @Query("SELECT COUNT(e) FROM Donor e")
+	long getNumberOfUser();
     
     
 

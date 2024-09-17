@@ -123,6 +123,11 @@ public class UserRestController {
 		System.out.println("Session has been invalid");
 		return true;
 	}
+	
+	@GetMapping("/numberOfUser")
+	public long numberOfUser() {
+		return userSer.countUser();
+	}
 
 
 }

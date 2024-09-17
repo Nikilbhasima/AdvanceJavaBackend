@@ -192,10 +192,6 @@ public class RequestBloodService {
 	}
 	
 	
-	
-	
-	
-	
 	public List<RequestDonorDTO> findListOfDonor(int id) {
 	    
 	    Optional<Donor> donor=donorRepo.findById(id);

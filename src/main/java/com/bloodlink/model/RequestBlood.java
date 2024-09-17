@@ -24,9 +24,7 @@ public class RequestBlood {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String bloodGrp;
-
 	@ManyToOne
 	@JoinColumn(name="addressId")
 	@JsonIgnore
@@ -49,13 +47,10 @@ public class RequestBlood {
 	private String patient;
 	
 	private String status;
-
 	@ManyToOne
 	@JoinColumn(name = "reqId")
 	@JsonIgnore
 	private Donor requester;
-	
-
 	@ManyToMany
 	@JoinTable(name="request_donor",joinColumns = {@JoinColumn(name="requestId")},
 	inverseJoinColumns = {@JoinColumn(name="donorId")})

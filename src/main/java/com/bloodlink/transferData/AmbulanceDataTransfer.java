@@ -1,50 +1,24 @@
-package com.bloodlink.model;
+package com.bloodlink.transferData;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.bloodlink.model.Address;
+import com.bloodlink.model.DriverPhone;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+;
 
-
-@Entity
-public class Ambulance {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AmbulanceDataTransfer {
 	private int id;
 
 	private String hospital;
 
 	private String hphone;
 
-	@ManyToOne
-	@JoinColumn(name="addressId")
-	@JsonIgnore
 	private Address address;
 
 	private String driver;
 
-	@OneToMany(mappedBy = "ambulance")
-	@JsonManagedReference
 	private List<DriverPhone> phoneD;
-	
-
-	
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 
 	public int getId() {
 		return id;
@@ -71,6 +45,15 @@ public class Ambulance {
 	}
 
 	
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	public String getDriver() {
 		return driver;
 	}
