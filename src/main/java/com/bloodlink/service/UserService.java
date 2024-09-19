@@ -37,8 +37,14 @@ public class UserService {
 	}
 	
 	public String setUser(UserDTO usDto) {
-		Optional<Address> address=addRepo.findById(usDto.getAddress());
 		
+		boolean isThere=donorRepo.existsByPhone(usDto.getPhone());
+		if(isThere) {
+			return "exist";
+		}
+		
+		
+		Optional<Address> address=addRepo.findById(usDto.getAddress());
 		Donor donor=new Donor();
 		donor.setUsername(usDto.getUsername());
 		donor.setBloodGrp(usDto.getBloodGrp());

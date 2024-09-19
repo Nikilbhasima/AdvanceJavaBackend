@@ -24,6 +24,17 @@ public interface DonorRepository extends JpaRepository<Donor, Integer> {
 
     @Query("SELECT COUNT(e) FROM Donor e")
 	long getNumberOfUser();
+
+
+
+
+	boolean existsByPhone(String phone);
+
+
+
+
+
+
     
     
 
