@@ -65,7 +65,7 @@ public class RequestBloodService {
 		
 		System.out.println("list of gmail are:"+gmailList);
 		
-//		sMail.postMail(gmailList,requestBlood);
+		sMail.postMail(gmailList,requestBlood);
 		
 		reqBloRep.save(requestBlood);
 		return true;
@@ -233,6 +233,16 @@ public class RequestBloodService {
 		
 		List<RequestBlood> requestList= donorRepo.findParticipatedRequestsByDonor(donorId);
 		return requestList;
+	}
+	
+	public int getNumberOfPartication(int id) {
+		int getNumber=reqBloRep.countRequestsByRequester(id);
+		return getNumber;
+	}
+	
+	public int getNumberOfBloodDonation(int id) {
+		int getNumber=reqBloRep.countRequestsByAcceptedDonor(id);
+		return getNumber;
 	}
 	
 	

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bloodlink.jpaRepository.AddressRepository;
 import com.bloodlink.jpaRepository.AmbulanceRepository;
@@ -136,6 +137,19 @@ public class AmbulanceService {
 	public long countAmbulance() {
 		long count=ambRepo.countAmbulance();
 		return count;
+	}
+	
+	@Transactional
+	public boolean removeAmbulance(int id) {
+		System.out.println(id);
+		Optional<Ambulance> am=ambRepo.findById(id);
+		if(am.isPresent()) {
+			System.out.println(am.get().getDriver());
+			driRepo.deleteAllByAmbulance(am.get());
+			ambRepo.deleteById(id);
+			return true;
+		}
+		return false;
 	}
 	
 

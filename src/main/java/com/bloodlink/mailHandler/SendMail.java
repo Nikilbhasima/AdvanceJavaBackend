@@ -46,7 +46,8 @@ public class SendMail {
 	            .append("------------------------------\n\n")
 	            .append("Your prompt response can save a life. Thank you for your support.\n\n")
 	            .append("Best regards,\n")
-	            .append("BloodLink Team");
+	            .append("BloodLink Team\n")
+	            .append("Go to Blood Link To register yourself");
 
 	        
 	        msg.setTo(gmails.toArray(new String[0]));

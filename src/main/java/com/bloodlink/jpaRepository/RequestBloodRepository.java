@@ -19,11 +19,14 @@ public interface RequestBloodRepository extends JpaRepository<RequestBlood, Inte
 
 	List<RequestBlood> findAllById(int id);
 
-//	 @Query("SELECT d FROM Donor d JOIN d.acceptedList rb WHERE rb.id = :requestId")
-//	  List<Donor> findDonorsByRequestId(int requestId);
-
-
 	@Query("SELECT rb.acceptedList FROM RequestBlood rb WHERE rb.id = :requestId")
     List<Donor> findDonorsByRequestBloodId( int requestId);
+
+	@Query("SELECT COUNT(rb) FROM RequestBlood rb WHERE rb.requester.id = :donorId")
+	int countRequestsByRequester(int donorId);
+
+//    @Query("SELECT COUNT(rb) FROM RequestBlood rb JOIN rb.acceptedList d WHERE d.id = :donorId")
+	@Query("SELECT COUNT(rb) FROM RequestBlood rb JOIN rb.acceptedList d WHERE d.id = :donorId AND rb.requester.id != :donorId")
+	int countRequestsByAcceptedDonor(int donorId);
 
 }

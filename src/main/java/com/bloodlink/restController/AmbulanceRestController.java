@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,16 @@ public class AmbulanceRestController {
 	@GetMapping("numberOfAmbulance")
 	public long numberOfAmbulance() {
 		return ambS.countAmbulance();
+	}
+	
+	@DeleteMapping("/deleteAmbulance/{id}")
+	public boolean deleteAmbulance(@PathVariable("id") int id) {
+	System.out.println(id);
+	 if(ambS.removeAmbulance(id)) {
+		 System.out.println("ambulance deleted successfully");
+		 return true;
+	 }
+	 return false;
 	}
 	
 }

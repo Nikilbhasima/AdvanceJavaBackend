@@ -42,8 +42,6 @@ public class UserService {
 		if(isThere) {
 			return "exist";
 		}
-		
-		
 		Optional<Address> address=addRepo.findById(usDto.getAddress());
 		Donor donor=new Donor();
 		donor.setUsername(usDto.getUsername());

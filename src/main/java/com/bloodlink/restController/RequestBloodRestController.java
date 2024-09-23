@@ -119,4 +119,23 @@ public class RequestBloodRestController {
 		Donor donor=(Donor) session.getAttribute("userInfo");
 		reqBloS.updateAvailable(donor.getId());
 	}
+	
+	@GetMapping("/numberOfParticipation")
+	public int findNumberOfParticipatin(HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		Donor donor=(Donor) session.getAttribute("userInfo");
+		
+		int number=reqBloS.getNumberOfPartication(donor.getId());
+		System.out.println("this is number of count"+number);
+		return number;
+	}
+	
+	@GetMapping("/numberOfBloodDonation")
+	public int findNumberOfBloodDonation(HttpServletRequest request) {
+		HttpSession session=request.getSession();
+		Donor donor=(Donor) session.getAttribute("userInfo");
+		int getNumber=reqBloS.getNumberOfBloodDonation(donor.getId());
+		System.out.println("number of participation:"+getNumber);
+		return getNumber;
+	}
 }
